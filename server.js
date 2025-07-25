@@ -1,6 +1,12 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+import express from 'express';
+import path from 'path';
+import fs from 'fs/promises'; // use the Promise-based API
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 
 const PORT = 5000;
@@ -17,12 +23,7 @@ app.get('/search', (req, res) => {
     const query = req.query.query || '';
 
     if (!isValid(query)) {
-        // On invalid query, serve index.html again (without redirect or error param)
-        const filePath = path.join(__dirname, 'frontend', 'index.html');
-        return fs.readFile(filePath, 'utf8', (err, data) => {
-            if (err) return res.status(500).send('Error loading page.');
-            res.send(data); // Serve index.html again
-        });
+        return res.redirect('/');
     }
 
     // Redirect to result page with query in URL
