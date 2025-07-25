@@ -1,0 +1,21 @@
+services:
+  web_app:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    ports:
+     - "5000:5000"
+    container_name: web_app 
+
+  git_server:
+    build:
+      context: .
+      dockerfile: local_git/Dockerfile
+    ports:
+     - "3000:3000"
+    volumes:
+      - git-data:/home/weixin
+    container_name: git-server
+
+volumes:
+  git-data:
