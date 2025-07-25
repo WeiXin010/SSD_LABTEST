@@ -34,7 +34,7 @@ jobs:
       options: --network-alias=testserver
 
     env:
-      APP_URL: http://testserver:5555/
+      APP_URL: http://testserver:5000/
       SELENIUM_HOST: http://selenium:4444/wd/hub
 
     services:
